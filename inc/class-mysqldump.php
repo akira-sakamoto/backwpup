@@ -87,6 +87,11 @@ class BackWPup_MySQLDump {
 			else
 				$args[ 'dbsocket' ] = $hostparts[ 1 ];
 		}
+		
+		// az: forced to match dbsocket and default_socket
+		$default_socket = ini_get('mysql.default_socket');
+		if ($args['dbsocket'] != $default_socket)
+			$args['dbsocket'] = $default_socket;
 
 		$this->mysqli = mysqli_init();
 		if ( ! $this->mysqli )
